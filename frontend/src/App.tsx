@@ -1,9 +1,13 @@
-import "./App.css";
-
+import { Routes, Route } from "react-router-dom";
+import TopPage from "./pages/TopPage";
+import PublishPage from "./pages/PublishPage";
 function App() {
   return (
     <>
-      <div className="bg-amber-500 text-2xl font-bold">hello react</div>
+      <Routes>
+        <Route path="/top" element={<TopPage />} />
+        <Route path="/publish" element={<PublishPage />} />
+      </Routes>
     </>
   );
 }
