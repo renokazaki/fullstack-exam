@@ -5,5 +5,4 @@ const PublishQuestionPage = () => {
     </>
   );
 };
-
 export default PublishQuestionPage;
