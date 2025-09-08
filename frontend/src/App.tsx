@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <div>hello react</div>
+      <div className="bg-amber-500 text-2xl font-bold">hello react</div>
     </>
   );
 }
