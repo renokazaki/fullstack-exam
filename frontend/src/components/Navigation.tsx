@@ -6,10 +6,10 @@ const Navigation = () => {
       <nav className="flex justify-between  items-center h-36 border-b-2 border-gray-300">
         <ul className="flex justify-around w-full">
           <li>
-            <Link to="/top">Top</Link>
+            <Link to="/question/top">Top</Link>
           </li>
           <li>
-            <Link to="/publishQuestion">publishQuestion</Link>
+            <Link to="/question/publish">publishQuestion</Link>
           </li>
           <li>
             <Link to="/page3">Page3</Link>

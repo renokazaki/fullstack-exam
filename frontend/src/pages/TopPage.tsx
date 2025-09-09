@@ -35,7 +35,7 @@ const TopPage = () => {
           <div className="flex items-center">
             <Button
               className="ml-8 rounded-full bg-amber-400 hover:bg-amber-500"
-              onClick={() => navigate("/publishQuestion")}
+              onClick={() => navigate("/question/publish")}
             >
               質問を投稿
             </Button>

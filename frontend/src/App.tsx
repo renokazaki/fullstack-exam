@@ -4,15 +4,18 @@ import PreviewPage from "./pages/PreviewPage";
 import PublishQuestionPage from "./pages/PublishQuestionPage";
 import PublishAnswerPage from "./pages/PublishAnswerPage";
 import DraftPage from "./pages/DraftPage";
+
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/top" element={<TopPage />} />
-        <Route path="/publishQuestion" element={<PublishQuestionPage />} />
-        <Route path="/publishAnswer" element={<PublishAnswerPage />} />
-        <Route path="/preview" element={<PreviewPage />} />
-        <Route path="/draft" element={<DraftPage />} />
+        <Route path="/question">
+          <Route path="top" element={<TopPage />} />
+          <Route path="publish" element={<PublishQuestionPage />} />
+          <Route path="answer" element={<PublishAnswerPage />} />
+          <Route path="preview" element={<PreviewPage />} />
+          <Route path="draft" element={<DraftPage />} />
+        </Route>
       </Routes>
     </>
   );
