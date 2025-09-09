@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Navigation = () => {
   return (
     <>
-      <nav className="flex justify-between  items-center h-36 border-b-2 border-gray-300">
+      <nav className="h-16 flex justify-between items-center border-b-2 border-gray-300 ">
         <ul className="flex justify-around w-full">
           <li>
             <Link to="/question/top">Top</Link>
@@ -12,7 +12,7 @@ const Navigation = () => {
             <Link to="/question/publish">publishQuestion</Link>
           </li>
           <li>
-            <Link to="/page3">Page3</Link>
+            <Link to="/profile">Profile</Link>
           </li>
         </ul>
       </nav>

@@ -19,7 +19,7 @@ const TopPage = () => {
         </div>
         <main
           className="flex w-full px-12 mt-12"
-          style={{ height: "calc(100vh - 144px - 112px)" }}
+          style={{ height: "calc(100vh - 160px - 96px)" }}
         >
           <div className="flex-3  mr-8 overflow-y-hidden ">
             <ScrollArea />
@@ -28,7 +28,7 @@ const TopPage = () => {
             <Sort />
           </div>
         </main>
-        <div className="h-28 bg-gray-300 flex items-center justify-between px-8">
+        <div className="sticky bottom-0 h-24 bg-gray-300 flex items-center justify-between px-8">
           <div className="flex-1 flex justify-center items-center">
             ページネーション
           </div>
