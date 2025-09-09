@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 
-const PublishPage = () => {
+const PublishQuestionPage = () => {
   const navigate = useNavigate();
   return (
     <>
@@ -68,4 +68,4 @@ const PublishPage = () => {
     </>
   );
 };
-export default PublishPage;
+export default PublishQuestionPage;
