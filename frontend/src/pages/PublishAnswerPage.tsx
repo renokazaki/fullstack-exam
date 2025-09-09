@@ -30,7 +30,7 @@ const PublishAnswerPage = () => {
               <Button
                 size="default"
                 className="w-full mr-4"
-                onClick={() => navigate("/top")}
+                onClick={() => navigate("/question/top")}
               >
                 投稿
               </Button>
