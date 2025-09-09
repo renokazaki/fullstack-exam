@@ -9,7 +9,7 @@ const Navigation = () => {
             <Link to="/top">Top</Link>
           </li>
           <li>
-            <Link to="/publish">Publish</Link>
+            <Link to="/publishQuestion">publishQuestion</Link>
           </li>
           <li>
             <Link to="/page3">Page3</Link>
