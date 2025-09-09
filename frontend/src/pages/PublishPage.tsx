@@ -4,8 +4,10 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useNavigate } from "react-router-dom";
 
 const PublishPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="w-full h-full flex justify-center items-center bg-black">
@@ -44,7 +46,11 @@ const PublishPage = () => {
           </CardContent>
           <CardFooter className="flex flex-col items-center justify-center gap-4 w-full h-1/4">
             <div className="flex w-2/3 justify-center">
-              <Button size="default" className="w-1/2 mr-4">
+              <Button
+                size="default"
+                className="w-1/2 mr-4"
+                onClick={() => navigate("/Preview")}
+              >
                 プレビュー
               </Button>
               <Button size="default" className="w-1/2 mr-4">
