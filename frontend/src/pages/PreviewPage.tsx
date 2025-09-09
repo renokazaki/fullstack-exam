@@ -21,7 +21,7 @@ const PreviewPage = () => {
               <Button
                 size="default"
                 className="w-1/2 mr-4"
-                onClick={() => navigate("/publish")}
+                onClick={() => navigate("/PublishQuestionPage")}
               >
                 戻る
               </Button>
