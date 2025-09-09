@@ -3,7 +3,7 @@ import BadgeComponent from "./BadgeComponent";
 const Question = () => {
   return (
     <>
-      <div className="mb-4">
+      <div className="">
         <Card className="w-full">
           <CardHeader>
             <CardTitle>タイトル</CardTitle>
