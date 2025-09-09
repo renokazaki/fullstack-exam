@@ -12,12 +12,12 @@ const PublishQuestionPage = () => {
     <>
       <div className="w-full h-full flex justify-center items-center bg-black">
         <Card className="h-[650px] w-[700px] p-4">
-          <a
-            href="/question/draft"
+          <Button
             className="text-blue-500 underline flex justify-end mt-4"
+            onClick={() => navigate("/question/draft")}
           >
             下書きリスト
-          </a>
+          </Button>
           <div className=" h-0.5/4 flex flex-row items-center justify-center ">
             <h2 className="text-xl text-gray-600">質問を投稿</h2>
           </div>
