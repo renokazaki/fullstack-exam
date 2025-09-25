@@ -1,17 +1,19 @@
-import { signup } from "../../action/auth";
-
 import React from "react";
 import styles from "../authPage.module.css";
+import Card from "@mui/material/Card";
+import Link from "next/link";
+import SignupForm from "../component/SignupForm";
 const SignupPage = () => {
   return (
     <div className={styles.authPageContainer}>
-      <form action={signup}>
-        <label htmlFor="email">Email:</label>
-        <input id="email" name="email" type="email" required />
-        <label htmlFor="password">Password:</label>
-        <input id="password" name="password" type="password" required />
-        <button>Sign up</button>
-      </form>
+      <Card className={styles.card}>
+        <h1 className={styles.title}>サインアップ</h1>
+        <p className={styles.subtitle}>
+          既にアカウントをお持ちの方は
+          <Link href="/login">ログイン</Link>へ
+        </p>
+        <SignupForm />
+      </Card>
     </div>
   );
 };
