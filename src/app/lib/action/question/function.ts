@@ -29,25 +29,25 @@ export async function createQuestion(formData: FormData) {
   revalidatePath("/questions");
 }
 
-// // 質問を取得するサーバーアクション
-// export async function getQuestions() {
-//   const questions = await prisma.question.findMany({
-//     include: {
-//       user: true,
-//       category: true,
-//       tags: {
-//         include: {
-//           tag: true,
-//         },
-//       },
-//     },
-//     orderBy: {
-//       createdAt: "desc",
-//     },
-//   });
+// 質問を取得するサーバーアクション
+export async function getQuestions() {
+  const questions = await prisma.question.findMany({
+    include: {
+      user: true,
+      category: true,
+      tags: {
+        include: {
+          tag: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-//   return questions;
-// }
+  return questions;
+}
 
 // ユーザー自身の質問を取得するサーバーアクション
 export async function getUserQuestions() {
