@@ -73,3 +73,20 @@ export async function getUserQuestions() {
 
   return questions;
 }
+
+// 質問を取得するサーバーアクション
+export async function getQuestion(questionId: string) {
+  const question = await prisma.question.findUnique({
+    where: { id: questionId },
+    include: {
+      user: true,
+      category: true,
+      tags: {
+        include: {
+          tag: true,
+        },
+      },
+    },
+  });
+  return question;
+}

@@ -1,0 +1,66 @@
+.card {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  border: 1px solid #757575;
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+}
+
+.cardLink:hover .card {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.badgeContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.userInfoIcon {
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  background-color: #757575;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+}
+
+.userInfoDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.userInfoDetail p {
+  margin: 0;
+  font-size: 14px;
+}
