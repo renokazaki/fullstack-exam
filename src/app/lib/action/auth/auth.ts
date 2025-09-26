@@ -34,7 +34,7 @@ export async function login(data: LoginFormValues) {
     console.log(error);
     redirect("/error");
   }
-  redirect("/");
+  redirect("/top");
 }
 
 export async function signup(data: SignupFormValues) {
@@ -66,5 +66,5 @@ export async function signup(data: SignupFormValues) {
     },
   });
 
-  redirect("/");
+  redirect("/top");
 }

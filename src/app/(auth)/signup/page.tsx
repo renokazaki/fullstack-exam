@@ -8,7 +8,7 @@ import { getAuth } from "@/app/lib/action/auth/auth";
 const SignupPage = async () => {
   const { data } = await getAuth();
   if (data.user) {
-    redirect("/");
+    redirect("/top");
   }
   return (
     <div className={styles.authPageContainer}>
