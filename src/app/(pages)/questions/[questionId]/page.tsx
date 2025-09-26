@@ -28,7 +28,7 @@ export default async function QuestionDetailPage({
           ]}
         />
         <Suspense fallback={<Loading />}>
-          <QuestionCard question={question} />
+          <QuestionCard question={question} linkToUser={true} />
         </Suspense>
         <div className={styles.answerHeader}>
           <p className={styles.answerHeaderTitle}>全999件の回答</p>
