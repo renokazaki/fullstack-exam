@@ -1,9 +1,100 @@
 .card {
-  width: 900px;
   height: 200px;
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: start;
+  justify-content: space-between;
   border: 1px solid #757575;
+  padding: 20px;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  padding: 50px;
+  padding-bottom: 80px; /* フッターの高さ分の余白を追加 */
+}
+
+.questionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 20px;
+}
+
+.badge {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 50%;
+  align-items: start;
+  justify-content: start;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.userInfoIcon {
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  background-color: #757575;
+}
+
+.userInfoDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sortArea {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.sortCard {
+  padding: 20px;
+  height: 400px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  background-color: #fff;
+  z-index: 100;
+  border-top: 1px solid #e0e0e0;
+}
+.paginationContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* 中央揃え */
+}
+.createButtonContainer {
+  display: flex;
+  justify-content: flex-end; /* 右揃え */
+  background-color: #ff9900;
+  border-radius: 50%;
+  padding: 5px 15px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
 }
