@@ -1,19 +1,20 @@
 import Button from "@mui/material/Button";
 import { getAuth } from "./Hooks/auth";
 import { redirect } from "next/navigation";
-import { prisma } from "../../prisma/prisma";
+import { getUserQuestions } from "./lib/action/question/function";
+import LogoutButton from "./(auth)/component/LogoutButton";
 
 export default async function Home() {
   const { data, error } = await getAuth();
   if (error || !data) {
     redirect("/login");
   }
-  console.log(data);
-  const questions = await prisma.question.findMany();
+  const questions = await getUserQuestions();
   console.log(questions);
 
   return (
     <>
+      <LogoutButton />
       {questions.map((question) => (
         <div key={question.id}>
           <h2>{question.title}</h2>
