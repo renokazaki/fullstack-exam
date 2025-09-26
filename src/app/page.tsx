@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import { getAuth } from "./Hooks/auth";
+import { getAuth } from "./lib/action/auth/auth";
 import { redirect } from "next/navigation";
 import { getUserQuestions } from "./lib/action/question/function";
 import LogoutButton from "./(auth)/component/LogoutButton";
