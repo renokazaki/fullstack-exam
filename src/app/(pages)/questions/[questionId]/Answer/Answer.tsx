@@ -3,6 +3,7 @@ import styles from "./Answer.module.css";
 import Card from "@mui/material/Card";
 import Badge from "@mui/material/Badge";
 import { getAnswers } from "@/app/lib/action/answer/action";
+import Link from "next/link";
 
 type AnswerProps = {
   questionId: string;
@@ -11,6 +12,7 @@ type AnswerProps = {
 const Answer = async ({ questionId }: AnswerProps) => {
   const answers = await getAnswers(questionId);
 
+  console.log(answers);
   if (!answers) {
     return <div>回答がありません</div>;
   }
@@ -25,12 +27,18 @@ const Answer = async ({ questionId }: AnswerProps) => {
                 : "ベストアンサーに選択する"}
             </p>
             <div className={styles.answerUserInfo}>
-              <div className={styles.answerUserInfoIcon}>icon</div>
-              <div className={styles.answerUserDetailInfo}>
-                <p>{answer.user?.username}</p>
-                <p>{answer.createdAt?.toLocaleDateString()}</p>
-              </div>
+              <Link
+                href={`/profile/${answer.user?.id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <div className={styles.answerUserInfoIcon}>icon</div>
+                <div className={styles.answerUserDetailInfo}>
+                  <p>{answer.user?.username}</p>
+                  <p>{answer.createdAt?.toLocaleDateString()}</p>
+                </div>
+              </Link>
             </div>
+
             <div className={styles.answerContent}>
               <p>{answer.content}</p>
             </div>

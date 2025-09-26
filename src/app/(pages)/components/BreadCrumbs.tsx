@@ -13,7 +13,11 @@ type BreadCrumbItem = {
 export default function BreadCrumbs({ items }: { items: BreadCrumbItem[] }) {
   const router = useRouter();
   const handleNavigate = (path: string) => {
-    router.push(path);
+    if (path === "back") {
+      router.back();
+    } else {
+      router.push(path);
+    }
   };
   return (
     <Breadcrumbs aria-label="breadcrumb">
