@@ -1,0 +1,37 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  border: 1px solid #757575;
+}
+.answerUserInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.answerUserInfoIcon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #757575;
+}
+.answerUserDetailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.answerContent {
+  margin-top: 10px;
+}
+.answerVote {
+  background-color: #db0000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-left: 0;
+  margin-right: auto;
+}
