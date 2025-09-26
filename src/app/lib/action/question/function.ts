@@ -3,14 +3,26 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "../../../../../prisma/prisma";
 import { getUserId } from "../auth/auth";
+import { SubmitQuestionFormValues } from "../../validation/SubmitContentSchema";
+import { Category } from "@prisma/client";
 
 // 質問を投稿するサーバーアクション
-export async function createQuestion(formData: FormData) {
+export async function createQuestion(data: SubmitQuestionFormValues) {
   const userId = await getUserId();
   // フォームデータから質問の情報を取得
-  const title = formData.get("title") as string;
-  const description = formData.get("description") as string;
-  const categoryId = formData.get("categoryId") as string;
+  const title = data.title as string;
+  const description = data.description as string;
+  const category = data.categoryId as string;
+  let createdCategory: Category | null = null;
+
+  if (category) {
+    createdCategory = await prisma.tag.create({
+      data: {
+        id: category,
+        name: category,
+      },
+    });
+  }
 
   // Prismaを使用してデータベースに質問を保存
   await prisma.question.create({
@@ -19,7 +31,7 @@ export async function createQuestion(formData: FormData) {
       title,
       description,
       userId,
-      categoryId,
+      categoryId: createdCategory?.id,
       isDraft: false,
       createdAt: new Date(),
     },
@@ -27,6 +39,7 @@ export async function createQuestion(formData: FormData) {
 
   // ページを再検証してデータを更新
   revalidatePath("/questions");
+  return true;
 }
 
 // 質問を取得するサーバーアクション
