@@ -5,6 +5,21 @@ import { LoginFormValues, SignupFormValues } from "../../validation/authSchema";
 import { prisma } from "../../../../../prisma/prisma";
 import bcrypt from "bcrypt";
 
+export async function getAuth() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+
+  return { data, error };
+}
+
+export async function getUserId() {
+  const { data, error } = await getAuth();
+  if (error || !data.user) {
+    redirect("/login");
+  }
+  return data.user.id;
+}
+
 export async function login(data: LoginFormValues) {
   const supabase = await createClient();
 
@@ -52,19 +67,4 @@ export async function signup(data: SignupFormValues) {
   });
 
   redirect("/");
-}
-
-export async function getAuth() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-
-  return { data, error };
-}
-
-export async function getUserId() {
-  const { data, error } = await getAuth();
-  if (error || !data.user) {
-    redirect("/login");
-  }
-  return data.user.id;
 }

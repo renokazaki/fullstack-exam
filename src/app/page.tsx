@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import { getAuth } from "./lib/action/auth/auth";
 import { redirect } from "next/navigation";
-import { getUserQuestions } from "./lib/action/question/function";
+import { getQuestions } from "./lib/action/question/function";
 import LogoutButton from "./(auth)/component/LogoutButton";
 
 export default async function Home() {
@@ -9,7 +9,7 @@ export default async function Home() {
   if (error || !data) {
     redirect("/login");
   }
-  const questions = await getUserQuestions();
+  const questions = await getQuestions();
   console.log(questions);
 
   return (
