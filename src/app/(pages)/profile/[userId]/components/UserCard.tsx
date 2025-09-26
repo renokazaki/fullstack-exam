@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./userCard.module.css"; // スタイルファイル名を変更
 import { getUserInfo } from "@/app/lib/action/user/action";
 import Button from "@mui/material/Button";
+import { getUserId } from "@/app/lib/action/auth/auth";
 
 type UserCardProps = {
   userID: string;
@@ -10,13 +11,17 @@ type UserCardProps = {
 
 const UserCard = async ({ userID }: UserCardProps) => {
   const userInfo = await getUserInfo(userID);
+  const myUserID = await getUserId();
+
   return (
     <Card className={styles.card}>
       <div className={styles.profileHeader}>
         <h2>プロフィール</h2>
-        <Button variant="contained" color="primary">
-          編集
-        </Button>
+        {myUserID === userID && (
+          <Button variant="contained" color="primary">
+            編集
+          </Button>
+        )}
       </div>
       <div className={styles.profileInfo}>
         <div className={styles.profileIcon}>
