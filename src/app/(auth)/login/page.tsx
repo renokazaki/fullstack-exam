@@ -1,10 +1,15 @@
 import Card from "@mui/material/Card";
-
 import React from "react";
 import styles from "../authPage.module.css";
 import Link from "next/link";
 import LoginForm from "../component/LoginForm";
-export default function LoginPage() {
+import { redirect } from "next/navigation";
+import { getAuth } from "@/app/lib/action/auth/auth";
+export default async function LoginPage() {
+  const { data } = await getAuth();
+  if (data.user) {
+    redirect("/");
+  }
   return (
     <div className={styles.authPageContainer}>
       <Card className={styles.card}>

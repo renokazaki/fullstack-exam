@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -16,8 +16,11 @@
     "@hookform/resolvers": "^5.2.2",
     "@mui/material": "^7.3.2",
     "@mui/material-nextjs": "^7.3.2",
+    "@prisma/client": "^6.16.2",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.57.4",
+    "@types/bcrypt": "^6.0.0",
+    "bcrypt": "^6.0.0",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -29,8 +32,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "prisma": "^6.16.2",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

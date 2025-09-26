@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { login } from "@/app/lib/action/auth";
+import { login } from "@/app/lib/action/auth/auth";
 import styles from "../authPage.module.css";
 import Button from "@mui/material/Button";
 import { useForm, SubmitHandler } from "react-hook-form";

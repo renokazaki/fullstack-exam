@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  username     String?
+  email        String?
+  passwordHash String?   @map("password_hash")
+  role         String?
+  createdAt    DateTime? @map("created_at")
+
+  // Relations
+  questions Question[]
+  answers   Answer[]
+  votes     Vote[]
+  comments  Comment[]
+
+  @@map("User")
+}
+
+model Category {
+  id   String  @id
+  name String?
+
+  // Relations
+  questions Question[]
+
+  @@map("Category")
+}
+
+model Tag {
+  id   String  @id
+  name String?
+
+  // Relations
+  questions QuestionTag[]
+
+  @@map("Tag")
+}
+
+model Question {
+  id           String    @id
+  title        String?
+  description  String?
+  userId       String?   @map("user_id")
+  categoryId   String?   @map("category_id")
+  isDraft      Boolean?  @map("is_draft")
+  bestAnswerId String?   @map("best_answer_id")
+  createdAt    DateTime? @map("created_at")
+
+  // Relations
+  user       User?         @relation(fields: [userId], references: [id])
+  category   Category?     @relation(fields: [categoryId], references: [id])
+  bestAnswer Answer?       @relation("BestAnswer", fields: [bestAnswerId], references: [id])
+  answers    Answer[]      @relation("QuestionAnswers")
+  tags       QuestionTag[]
+  comments   Comment[]
+
+  @@map("Question")
+}
+
+model Answer {
+  id         String    @id
+  questionId String?   @map("question_id")
+  content    String?
+  userId     String?   @map("user_id")
+  createdAt  DateTime? @map("created_at")
+
+  // Relations
+  question      Question?  @relation("QuestionAnswers", fields: [questionId], references: [id])
+  user          User?      @relation(fields: [userId], references: [id])
+  votes         Vote[]
+  comments      Comment[]
+  bestAnswerFor Question[] @relation("BestAnswer")
+
+  @@map("Answer")
+}
+
+model Vote {
+  id       String  @id
+  answerId String? @map("answer_id")
+  userId   String? @map("user_id")
+  type     String?
+
+  // Relations
+  answer Answer? @relation(fields: [answerId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id])
+
+  @@map("Vote")
+}
+
+model QuestionTag {
+  questionId String @map("question_id")
+  tagId      String @map("tag_id")
+
+  // Relations
+  question Question @relation(fields: [questionId], references: [id])
+  tag      Tag      @relation(fields: [tagId], references: [id])
+
+  @@id([questionId, tagId])
+  @@map("QuestionTag")
+}
+
+model Comment {
+  id         String    @id
+  questionId String?   @map("question_id")
+  answerId   String?   @map("answer_id")
+  content    String?
+  userId     String?   @map("user_id")
+  createdAt  DateTime? @map("created_at")
+
+  // Relations
+  question Question? @relation(fields: [questionId], references: [id])
+  answer   Answer?   @relation(fields: [answerId], references: [id])
+  user     User?     @relation(fields: [userId], references: [id])
+
+  @@map("Comment")
+}
