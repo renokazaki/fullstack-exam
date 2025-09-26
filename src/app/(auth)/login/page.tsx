@@ -4,7 +4,7 @@ import styles from "../authPage.module.css";
 import Link from "next/link";
 import LoginForm from "../component/LoginForm";
 import { redirect } from "next/navigation";
-import { getAuth } from "@/app/Hooks/auth";
+import { getAuth } from "@/app/lib/action/auth/auth";
 export default async function LoginPage() {
   const { data } = await getAuth();
   if (data.user) {

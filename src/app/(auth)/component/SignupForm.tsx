@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@mui/material/Button";
-import { signup } from "@/app/lib/action/auth";
+import { signup } from "@/app/lib/action/auth/auth";
 import styles from "../authPage.module.css";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
