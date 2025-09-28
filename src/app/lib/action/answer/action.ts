@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../../../../prisma/prisma";
 import { SubmitAnswerFormValues } from "../../validation/SubmitContentSchema";
 import { getUserId } from "../auth/auth";
@@ -34,3 +35,27 @@ export async function createAnswer(formData: SubmitAnswerFormValues) {
   });
   return answer;
 }
+
+export const updateBestAnswer = async (
+  questionId: string,
+  answerId: string
+) => {
+  // 新しいベストアンサーを設定
+  const updatedQuestion = await prisma.question.update({
+    where: { id: questionId },
+    data: { bestAnswerId: answerId },
+  });
+
+  const updatedAnswer = await prisma.answer.update({
+    where: { id: answerId },
+    data: {
+      bestAnswerFor: {
+        connect: { id: questionId },
+      },
+    },
+  });
+
+  revalidatePath(`/questions/${questionId}`);
+
+  return { updatedQuestion, updatedAnswer };
+};

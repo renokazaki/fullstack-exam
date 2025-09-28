@@ -4,26 +4,41 @@ import Card from "@mui/material/Card";
 import Badge from "@mui/material/Badge";
 import { getAnswers } from "@/app/lib/action/answer/action";
 import Link from "next/link";
+import BestAnswerButton from "./components/BestAnswerButton";
+import { Question } from "@prisma/client";
+import { getUserId } from "@/app/lib/action/auth/auth";
 
 type AnswerProps = {
-  questionId: string;
+  question: Question;
 };
 
-const Answer = async ({ questionId }: AnswerProps) => {
+const Answer = async ({ question }: AnswerProps) => {
+  const questionId = question.id;
+  const bestAnswerId = question.bestAnswerId;
+  const questionUserId = question.userId;
+  const myUserId = await getUserId();
   const answers = await getAnswers(questionId);
 
   if (!answers) {
     return <div>回答がありません</div>;
   }
+
   return (
     <>
       {answers.map((answer) => (
         <Card className={styles.card} key={answer.id}>
-          <p>
-            {answer.bestAnswerFor.length > 0
-              ? "ベストアンサー"
-              : "ベストアンサーに選択する"}
-          </p>
+          <div className={styles.bestAnswerButtonContainer}>
+            {bestAnswerId ? (
+              <p className={styles.bestAnswerText}>ベストアンサー</p>
+            ) : (
+              questionUserId === myUserId && (
+                <BestAnswerButton
+                  answerId={answer.id}
+                  questionId={questionId}
+                />
+              )
+            )}
+          </div>
           <div className={styles.answerUserInfo}>
             <Link
               href={`/profile/${answer.user?.id}`}

@@ -17,6 +17,7 @@ export default async function QuestionDetailPage({
   if (!question) {
     return <div>Question not found</div>;
   }
+
   return (
     <>
       <Header />
@@ -35,7 +36,7 @@ export default async function QuestionDetailPage({
           <SubmitModalContainer questionId={questionId} />
         </div>
         <Suspense fallback={<Loading />}>
-          <Answer questionId={questionId} />
+          <Answer question={question} />
         </Suspense>
       </main>
     </>

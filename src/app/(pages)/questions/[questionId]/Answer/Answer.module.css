@@ -98,3 +98,24 @@
   margin-top: 20px;
   align-self: flex-end;
 }
+
+.bestAnswerButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bestAnswerText {
+  color: rgb(244, 147, 3);
+  font-weight: bold;
+}
+
+.bestAnswerButton {
+  color: #1702ff;
+  border-bottom: 1px solid #1702ff;
+  margin-left: 0px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
