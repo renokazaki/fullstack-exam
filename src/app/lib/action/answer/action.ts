@@ -1,6 +1,8 @@
 "use server";
 
 import { prisma } from "../../../../../prisma/prisma";
+import { SubmitAnswerFormValues } from "../../validation/SubmitContentSchema";
+import { getUserId } from "../auth/auth";
 
 export async function getAnswers(questionId: string) {
   const answers = await prisma.answer.findMany({
@@ -17,8 +19,18 @@ export async function getAnswers(questionId: string) {
   return answers;
 }
 
-// export async function createAnswer(formData: FormData) {
-//   const userId = await getUserId();
-//   const questionId = formData.get("questionId") as string;
-//   const content = formData.get("content") as string;
-// }
+export async function createAnswer(formData: SubmitAnswerFormValues) {
+  const userId = await getUserId();
+  const questionId = formData.questionId as string;
+  const content = formData.content as string;
+  const answer = await prisma.answer.create({
+    data: {
+      id: crypto.randomUUID(),
+      questionId,
+      content,
+      userId,
+      createdAt: new Date(),
+    },
+  });
+  return answer;
+}

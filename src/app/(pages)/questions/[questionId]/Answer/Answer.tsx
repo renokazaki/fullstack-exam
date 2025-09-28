@@ -12,42 +12,39 @@ type AnswerProps = {
 const Answer = async ({ questionId }: AnswerProps) => {
   const answers = await getAnswers(questionId);
 
-  console.log(answers);
   if (!answers) {
     return <div>回答がありません</div>;
   }
   return (
     <>
-      <Card className={styles.card}>
-        {answers.map((answer) => (
-          <div key={answer.id}>
-            <p>
-              {answer.bestAnswerFor.length > 0
-                ? "ベストアンサー"
-                : "ベストアンサーに選択する"}
-            </p>
-            <div className={styles.answerUserInfo}>
-              <Link
-                href={`/profile/${answer.user?.id}`}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <div className={styles.answerUserInfoIcon}>icon</div>
-                <div className={styles.answerUserDetailInfo}>
-                  <p>{answer.user?.username}</p>
-                  <p>{answer.createdAt?.toLocaleDateString()}</p>
-                </div>
-              </Link>
-            </div>
-
-            <div className={styles.answerContent}>
-              <p>{answer.content}</p>
-            </div>
-            <Badge className={styles.answerVote}>
-              👍{answer.votes?.length || 0}
-            </Badge>
+      {answers.map((answer) => (
+        <Card className={styles.card} key={answer.id}>
+          <p>
+            {answer.bestAnswerFor.length > 0
+              ? "ベストアンサー"
+              : "ベストアンサーに選択する"}
+          </p>
+          <div className={styles.answerUserInfo}>
+            <Link
+              href={`/profile/${answer.user?.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <div className={styles.answerUserInfoIcon}>icon</div>
+              <div className={styles.answerUserDetailInfo}>
+                <p>{answer.user?.username}</p>
+                <p>{answer.createdAt?.toLocaleDateString()}</p>
+              </div>
+            </Link>
           </div>
-        ))}
-      </Card>
+
+          <div className={styles.answerContent}>
+            <p>{answer.content}</p>
+          </div>
+          <Badge className={styles.answerVote}>
+            👍{answer.votes?.length || 0}
+          </Badge>
+        </Card>
+      ))}
       {/* //TODO: ここに返信がある場合の条件を書き、コンポーネントを追加 */}
     </>
   );

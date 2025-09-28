@@ -11,6 +11,7 @@ import {
 import styles from "../topPage.module.css";
 import InputLabel from "@mui/material/InputLabel";
 import { createQuestion } from "@/app/lib/action/question/function";
+import { useRouter } from "next/navigation";
 
 type SubmitQuestionModalProps = {
   open: boolean;
@@ -20,6 +21,7 @@ export default function SubmitQuestionModal({
   open,
   onClose,
 }: SubmitQuestionModalProps) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,6 +34,7 @@ export default function SubmitQuestionModal({
     if (!response) {
       console.log("質問の投稿に失敗しました");
     } else {
+      await router.push(`/questions/${response.questionId}`);
       console.log("質問の投稿に成功しました");
       onClose();
     }
@@ -75,17 +78,17 @@ export default function SubmitQuestionModal({
               </p>
             )}
 
-            <InputLabel htmlFor="categoryId">カテゴリ</InputLabel>
+            <InputLabel htmlFor="tags">タグ</InputLabel>
             <input
-              id="categoryId"
+              id="tags"
               type="text"
-              placeholder="カテゴリを入力してください"
-              {...register("categoryId")}
+              placeholder="タグを入力してください"
+              {...register("tags")}
               className={styles.modalInput}
             />
-            {errors.categoryId && (
+            {errors.tags && (
               <p className={styles.modalError}>
-                {errors.categoryId.message as string}
+                {errors.tags.message as string}
               </p>
             )}
 
