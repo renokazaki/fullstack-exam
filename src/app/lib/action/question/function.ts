@@ -6,7 +6,10 @@ import { getUserId } from "../auth/auth";
 import { SubmitQuestionFormValues } from "../../validation/SubmitContentSchema";
 
 // 質問を投稿するサーバーアクション
-export async function createQuestion(data: SubmitQuestionFormValues) {
+export async function createQuestion(
+  data: SubmitQuestionFormValues,
+  isDraft: boolean
+) {
   try {
     const userId = await getUserId();
     // フォームデータから質問の情報を取得
@@ -33,7 +36,7 @@ export async function createQuestion(data: SubmitQuestionFormValues) {
         description,
         userId,
         categoryId: null,
-        isDraft: false,
+        isDraft,
         createdAt: new Date(),
       },
     });
@@ -81,6 +84,7 @@ export async function createQuestion(data: SubmitQuestionFormValues) {
 // 質問を取得するサーバーアクション
 export async function getQuestions() {
   const questions = await prisma.question.findMany({
+    where: { isDraft: false },
     include: {
       user: true,
       category: true,
@@ -106,6 +110,7 @@ export async function getUserQuestions() {
   const questions = await prisma.question.findMany({
     where: {
       userId,
+      isDraft: false,
     },
     include: {
       category: true,
@@ -126,7 +131,7 @@ export async function getUserQuestions() {
 // 質問を取得するサーバーアクション
 export async function getQuestion(questionId: string) {
   const question = await prisma.question.findUnique({
-    where: { id: questionId },
+    where: { id: questionId, isDraft: false },
     include: {
       user: true,
       category: true,

@@ -112,9 +112,27 @@
   margin-top: -10px;
 }
 
-.modalSubmitButton {
-  margin-top: 20px;
-  align-self: flex-end;
+.modalSubmitButtonContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.topButtonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.bottomButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .modalContentHeader {

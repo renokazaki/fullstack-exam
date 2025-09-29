@@ -14,10 +14,12 @@ import { createQuestion } from "@/app/lib/action/question/function";
 import { useRouter } from "next/navigation";
 import DraftModalContainer from "../Draft/DraftModalContainer";
 import { useState } from "react";
+
 type SubmitQuestionModalProps = {
   open: boolean;
   onClose: () => void;
 };
+
 export default function SubmitQuestionModal({
   open,
   onClose,
@@ -31,22 +33,36 @@ export default function SubmitQuestionModal({
   } = useForm<SubmitQuestionFormValues>({
     resolver: zodResolver(submitQuestionSchema),
   });
-  const onSubmit = async (data: SubmitQuestionFormValues) => {
-    const response = await createQuestion(data);
+
+  const onSubmit = async (data: SubmitQuestionFormValues, isDraft: boolean) => {
+    const response = await createQuestion(data, isDraft);
     if (!response) {
       console.log("質問の投稿に失敗しました");
     } else {
-      await router.push(`/questions/${response.questionId}`);
-      console.log("質問の投稿に成功しました");
+      if (!isDraft) {
+        await router.push(`/questions/${response.questionId}`);
+      }
+      console.log(
+        isDraft ? "下書きに保存しました" : "質問の投稿に成功しました"
+      );
       onClose();
     }
   };
+
+  // 下書き保存用のハンドラー
+  const handleDraftSubmit = handleSubmit((data) => onSubmit(data, true));
+
+  // 投稿用のハンドラー
+  const handlePostSubmit = handleSubmit((data) => onSubmit(data, false));
+
   const handleOpenDraftModal = () => {
     setOpenDraftModal(true);
   };
+
   const handleCloseDraftModal = () => {
     setOpenDraftModal(false);
   };
+
   return (
     <>
       <Modal
@@ -65,7 +81,7 @@ export default function SubmitQuestionModal({
             open={openDraftModal}
             onClose={handleCloseDraftModal}
           />
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form>
             <InputLabel htmlFor="title">タイトル</InputLabel>
             <input
               id="title"
@@ -106,16 +122,38 @@ export default function SubmitQuestionModal({
                 {errors.tags.message as string}
               </p>
             )}
+            <div className={styles.modalSubmitButtonContainer}>
+              <div className={styles.topButtonContainer}>
+                <Button
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  onClick={handleOpenDraftModal}
+                >
+                  プレビュー
+                </Button>
+                <Button
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  onClick={handleDraftSubmit}
+                >
+                  下書きに保存
+                </Button>
+              </div>
 
-            <div className={styles.modalSubmitButton}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "投稿中..." : "投稿する"}
-              </Button>
+              <div className={styles.bottomButtonContainer}>
+                <Button
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  onClick={handlePostSubmit}
+                >
+                  {isSubmitting ? "投稿中..." : "投稿する"}
+                </Button>
+              </div>
             </div>
           </form>
         </Box>
