@@ -1,6 +1,6 @@
 .main {
   overflow: hidden; /* メインコンテンツ全体はスクロールしない */
-  height: calc(100vh - 80px); /* ヘッダーの高さを引いた高さ */
+  height: calc(100vh - 140px); /* ヘッダーの高さを引いた高さ */
   display: flex;
   flex-direction: row;
   gap: 32px;
