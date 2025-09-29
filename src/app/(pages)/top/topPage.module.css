@@ -116,3 +116,10 @@
   margin-top: 20px;
   align-self: flex-end;
 }
+
+.modalContentHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
