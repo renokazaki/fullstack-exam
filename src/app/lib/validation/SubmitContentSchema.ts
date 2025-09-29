@@ -14,3 +14,10 @@ export const submitAnswerSchema = z.object({
 });
 
 export type SubmitAnswerFormValues = z.infer<typeof submitAnswerSchema>;
+
+export const submitCommentSchema = z.object({
+  questionId: z.string(),
+  content: z.string().min(1, { message: "コメントの本文は必須です" }),
+});
+
+export type SubmitCommentFormValues = z.infer<typeof submitCommentSchema>;

@@ -6,8 +6,9 @@ import Link from "next/link";
 import BestAnswerButton from "./components/BestAnswerButton";
 import { Question } from "@prisma/client";
 import { getUserId } from "@/app/lib/action/auth/auth";
-import Button from "@mui/material/Button";
 import VoteButton from "./components/VoteButton";
+import CommentCard from "./components/CommentCard";
+import CommentButton from "./components/CommentButton";
 
 type AnswerProps = {
   question: Question;
@@ -61,9 +62,13 @@ const Answer = async ({ question }: AnswerProps) => {
             myUserId={myUserId}
             answer={answer}
           />
+
+          {answer.comments.map((comment) => (
+            <CommentCard key={comment.id} comment={comment} />
+          ))}
+          <CommentButton answerId={answer.id} myUserId={myUserId} />
         </Card>
       ))}
-      {/* //TODO: ここに返信がある場合の条件を書き、コンポーネントを追加 */}
     </>
   );
 };
