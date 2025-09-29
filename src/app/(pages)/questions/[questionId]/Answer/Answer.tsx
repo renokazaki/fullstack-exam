@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "./Answer.module.css";
 import Card from "@mui/material/Card";
-import Badge from "@mui/material/Badge";
 import { getAnswers } from "@/app/lib/action/answer/action";
 import Link from "next/link";
 import BestAnswerButton from "./components/BestAnswerButton";
 import { Question } from "@prisma/client";
 import { getUserId } from "@/app/lib/action/auth/auth";
+import Button from "@mui/material/Button";
+import VoteButton from "./components/VoteButton";
 
 type AnswerProps = {
   question: Question;
@@ -55,9 +56,11 @@ const Answer = async ({ question }: AnswerProps) => {
           <div className={styles.answerContent}>
             <p>{answer.content}</p>
           </div>
-          <Badge className={styles.answerVote}>
-            👍{answer.votes?.length || 0}
-          </Badge>
+          <VoteButton
+            answerVote={answer.votes?.length || 0}
+            myUserId={myUserId}
+            answer={answer}
+          />
         </Card>
       ))}
       {/* //TODO: ここに返信がある場合の条件を書き、コンポーネントを追加 */}

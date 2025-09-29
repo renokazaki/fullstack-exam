@@ -59,3 +59,28 @@ export const updateBestAnswer = async (
 
   return { updatedQuestion, updatedAnswer };
 };
+
+export const voteAnswer = async (
+  answerId: string,
+  myUserId: string,
+  type: string
+) => {
+  const vote = await prisma.vote.create({
+    data: {
+      id: crypto.randomUUID(),
+      answerId,
+      userId: myUserId,
+      type: type,
+    },
+  });
+
+  await prisma.answer.update({
+    where: { id: answerId },
+    data: {
+      votes: {
+        connect: { id: vote.id },
+      },
+    },
+  });
+  revalidatePath(`/questions/${answerId}`);
+};
