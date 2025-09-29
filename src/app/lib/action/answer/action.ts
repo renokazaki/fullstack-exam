@@ -12,6 +12,7 @@ export async function getAnswers(questionId: string) {
       user: true,
       votes: true,
       bestAnswerFor: true,
+      comments: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -83,4 +84,30 @@ export const voteAnswer = async (
     },
   });
   revalidatePath(`/questions/${answerId}`);
+};
+
+export const createComment = async (
+  answerId: string,
+  myUserId: string,
+  content: string
+) => {
+  const comment = await prisma.comment.create({
+    data: {
+      id: crypto.randomUUID(),
+      answerId,
+      content,
+      userId: myUserId,
+      createdAt: new Date(),
+    },
+  });
+  await prisma.answer.update({
+    where: { id: answerId },
+    data: {
+      comments: {
+        connect: { id: comment.id },
+      },
+    },
+  });
+  revalidatePath(`/questions/${answerId}`);
+  return comment;
 };
