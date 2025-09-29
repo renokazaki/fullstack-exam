@@ -12,7 +12,8 @@ import styles from "../topPage.module.css";
 import InputLabel from "@mui/material/InputLabel";
 import { createQuestion } from "@/app/lib/action/question/function";
 import { useRouter } from "next/navigation";
-
+import DraftModalContainer from "../Draft/DraftModalContainer";
+import { useState } from "react";
 type SubmitQuestionModalProps = {
   open: boolean;
   onClose: () => void;
@@ -22,6 +23,7 @@ export default function SubmitQuestionModal({
   onClose,
 }: SubmitQuestionModalProps) {
   const router = useRouter();
+  const [openDraftModal, setOpenDraftModal] = useState(false);
   const {
     register,
     handleSubmit,
@@ -39,6 +41,12 @@ export default function SubmitQuestionModal({
       onClose();
     }
   };
+  const handleOpenDraftModal = () => {
+    setOpenDraftModal(true);
+  };
+  const handleCloseDraftModal = () => {
+    setOpenDraftModal(false);
+  };
   return (
     <>
       <Modal
@@ -49,7 +57,14 @@ export default function SubmitQuestionModal({
         className={styles.modal}
       >
         <Box className={styles.modalContent}>
-          <h2 id="modal-modal-title">質問を投稿</h2>
+          <div className={styles.modalContentHeader}>
+            <h2 id="modal-modal-title">質問を投稿</h2>
+            <Button onClick={handleOpenDraftModal}>下書きリスト</Button>
+          </div>
+          <DraftModalContainer
+            open={openDraftModal}
+            onClose={handleCloseDraftModal}
+          />
           <form onSubmit={handleSubmit(onSubmit)}>
             <InputLabel htmlFor="title">タイトル</InputLabel>
             <input
